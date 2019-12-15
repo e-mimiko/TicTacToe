@@ -2,7 +2,6 @@
 
 import random
 
-
 def play():
     playOrNot=input("This is a game of Xs and Os, would you like to play? Yes/No --> ")
     while playOrNot != "Yes" and playOrNot != "No":
@@ -20,9 +19,23 @@ def play():
 play()
         
 
+def Game():
+    playerChoice=play()
 
-            
+'''
+for r in range (3):
+    roll=[]
+    for c in range(3):
+        roll.append("?")
+    mat.append(roll)
+#print (mat)
 
+
+for i in range(3):
+    for h in range (3):
+        print ("\t",mat[i][r],"\t",end="")
+    print()
+'''
         
 
     
