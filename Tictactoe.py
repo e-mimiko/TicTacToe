@@ -40,7 +40,7 @@ def make_board():
         for c in range(boardChoice):
             roll.append("?")
         mat.append(roll)
-    return playerChoice, computerChoice
+    return playerChoice, computerChoice, boardChoice
 
 def print_board():
     print()
@@ -49,8 +49,9 @@ def print_board():
             print("\t", c, end="")
         print()
 
-playerChoice, computerChoice = make_board()
-
+##Game Body
+playerChoice, computerChoice, boardChoice = make_board()
+play = 0
 while winners_score == 0 and any("?" in i for i in mat) == True:
     try:
             row,column = input("Enter the ROW, then a SPACE, then COLUMN you'd like to play e.g. 2 1 : ").split()
@@ -60,114 +61,93 @@ while winners_score == 0 and any("?" in i for i in mat) == True:
     if int(row) > len(mat)-1 or int(column) > len(mat)-1:
         print("\nEnter a valid Row and Column in the range of the Board")
         continue
-    row = int(row)
-    column = int(column)
-    if mat[row][column] != "?":
-        print ("\nThis position has already been played.")
-        continue
-    break
+    else:
+        row = int (row)
+        column = int(column)
+        if mat[row][column] != "?":
+            print("\nThis position has already been played.")
+            continue
 
-mat[row][column] = playerChoice
-print_board()
+    mat[row][column] = playerChoice
+    play += 1
+    print_board()
+#Score checked here
+    if play >= boardChoice:
+        for r in range(boardChoice):  # for columns
+            roll = []
+            for c in range(boardChoice):
+                roll.append(mat[r][c])
+            if len(set(roll)) == 1:
+                winners_score = 1
+                winner = str(set(roll))
+                print(winner)
 
-row = randint(0, len(mat) - 1)
-column = randint(0, len(mat) - 1)
-while mat[row][column] != "?":
+
+
+
+
+#computer plays here
     row = randint(0, len(mat) - 1)
     column = randint(0, len(mat) - 1)
-    continue
-mat[row][column] = computerChoice
-print_board()
+    while mat[row][column] != "?":
+        row = randint(0, len(mat) - 1)
+        column = randint(0, len(mat) - 1)
+        continue
+    mat[row][column] = computerChoice
+    print_board()
+'''
+        roll = []  # for similar increments
+        for r in range(boardChoice):
+            c = r
+            roll.append(mat[r][c])
+        if len(set(roll)) == 1:
+            winners_score = 1
+            winner = str(set(roll))
+            print(winner)
+            break
+'''
 
 
+'''
+    if play >= int(boardChoice):
+        for r in range(int(boardChoice)):
+            roll = []
+            for c in range(int(boardChoice)):
+                roll.append(mat[r][c])
+            if len(set(roll)) == 1:
+                winners_score = 1
+                winner = str(set(roll))
+'''
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print(winner, "player wins!")
 
 
 
 '''
-def play():
-    playerChoice, computerChoice = make_board()
-    while True:
-        try:
-            row,column = input("Enter the ROW, then a SPACE, then COLUMN you'd like to play e.g. 2 1 : ").split()
-        except ValueError:
-            print("\nPlease enter a SPACE between the row e.g. 2 3")
-            continue
-        row = int(row)
-        column = int(column)
-        if row > len(mat)-1 or column > len(mat)-1:
-            print("\nEnter a valid Row and Column")
-            continue
-        break
-
-# print board
-    print(len(mat))
-    for r in mat:
-        for c in r:
-            print("\t", c, end="")
-        print()
+def check_score(play,winners_score):
+    while play >= boardChoice:
+        for r in range(boardChoice): #for columns
+            roll = []
+            for c in range(boardChoice):
+                roll.append(mat[r][c])
+            if len(set(roll)) == 1:
+                winners_score = 1
+                winner = str(set(roll))
+                print (winner)
+                break
+                return winner
 
 
+        roll = [] # for similar increments
+        for r in range(boardChoice):
+            c = r
+            roll.append(mat[r][c])
+        if len(set(roll)) == 1:
+            winners_score = 1
+            winner = str(set(roll))
+            print (winner)
+            break
+            return winner
 
-
-play()
+        #emi, figure out algorithm for reversed diagonal
 '''
-
-
-
-
-
-
-#print board    
-'''    
-print (mat)
-print(len(mat))
-mat[0][1]="X"
-mat[2][1]="O"
-for i in mat:
-    for x in i:
-        print("\t", x, end="")
-    print()
-    
-'''   
-
-
-##old printboard
-'''
-make_board()
-
-
-def print_board()
-    for i in range(boardChoice):
-        for h in range (boardChoice):
-            print ("\t",mat[i][r],end="")
-        print()
-
-print_board()
-
-'''
-
-
-
-
-
-
