@@ -58,8 +58,9 @@ def check_score(play,winners_score):
             if len(set(roll)) == 1 and ("?") not in set(roll):
                 winners_score = 1
                 winner = str(set(roll))
-                print (winner)
+                print (winner, "a")
                 return winner, winners_score
+            
       
         if winners_score == 0:
             for r in range(boardChoice): #for columns
@@ -69,7 +70,7 @@ def check_score(play,winners_score):
                 if len(set(roll)) == 1 and ("?") not in set(roll):
                     winners_score = 1
                     winner = str(set(roll))
-                    print (winner)
+                    print (winner, "b")
                     return winner, winners_score
 
         if winners_score == 0: 
@@ -80,25 +81,30 @@ def check_score(play,winners_score):
             if len(set(roll)) == 1 and ("?") not in set(roll):
                 winners_score = 1
                 winner = str(set(roll))
-                print (winner)
+                print (winner, "c")
                 return winner, winners_score
+##work on this part
+        if winners_score == 0:
+            roll = []
+            for r in range(boardChoice):
+                for c in reversed(boardChoice):
+                    pass
+                roll.append(mat[r][c])
+            if len(set(roll)) == 1 and ("?") not in set(roll):
+                winners_score = 1
+                winner = str(set(roll))
+                print (winner, "d")
+                return winner, winners_score
+                
+
+        if any("?" in i for i in mat) == False:
+            winner = ("Nobody")
+            winners_score = 2
+            return winner, winners_score
                 
             
                 
-'''
-        roll = [] # for similar increments
-        for r in range(boardChoice):
-            c = r
-            roll.append(mat[r][c])
-        if len(set(roll)) == 1:
-            winners_score = 1
-            winner = str(set(roll))
-            print (winner)
-            break
-            return winner
 
-        #emi, figure out algorithm for reversed diagonal
-'''
 ##Game Body
 playerChoice, computerChoice, boardChoice = make_board()
 play = 0
@@ -121,15 +127,17 @@ while winners_score == 0 and any("?" in i for i in mat) == True:
     mat[row][column] = playerChoice
     play += 1
     print_board()
-    
-    if check_score(play,winners_score) is None:
-        pass
-    else:
-        winner, winners_score = check_score(play,winners_score)
-        winner = str(winner)
-        break
-    
 
+    try:
+        winner, winners_score = check_score(play,winners_score)
+        if winners_score == 1:
+            break
+        elif winners_score == 2:
+            break
+    except TypeError:
+        pass
+        
+    
 
 #computer plays here
     
@@ -142,55 +150,23 @@ while winners_score == 0 and any("?" in i for i in mat) == True:
     mat[row][column] = computerChoice
     print("Computer Plays...", row, column)
     print_board()
-    if check_score(play,winners_score) is None:
-        pass
-    else:
+
+    try:
         winner, winners_score = check_score(play,winners_score)
-        winner = str(winner)
-        break
+        if winners_score == 1:
+            break
+        elif winners_score == 2:
+            break
+    except TypeError:
+        pass
 
 
 if winners_score == 1:
     print(winner, "player wins!")
 else:
     print("No One Wins!")
-'''    
-#Score checked here
-    if play >= boardChoice:
-        for r in range(boardChoice):  # for columns
-            roll = []
-            for c in range(boardChoice):
-                roll.append(mat[r][c])
-            if len(set(roll)) == 1:
-                winners_score = 1
-                winner = str(set(roll))
-                print(winner)
-'''
 
 
-'''
-        roll = []  # for similar increments
-        for r in range(boardChoice):
-            c = r
-            roll.append(mat[r][c])
-        if len(set(roll)) == 1:
-            winners_score = 1
-            winner = str(set(roll))
-            print(winner)
-            break
-'''
-
-
-'''
-    if play >= int(boardChoice):
-        for r in range(int(boardChoice)):
-            roll = []
-            for c in range(int(boardChoice)):
-                roll.append(mat[r][c])
-            if len(set(roll)) == 1:
-                winners_score = 1
-                winner = str(set(roll))
-'''
 
 
 
